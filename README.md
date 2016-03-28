@@ -1,0 +1,6 @@
+# ssb-query
+
+
+## License
+
+MIT
