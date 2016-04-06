@@ -8,7 +8,7 @@
     "url": "git://github.com/dominictarr/ssb-query.git"
   },
   "dependencies": {
-    "streamview-links": "^1.0.3"
+    "streamview-links": "^2.0.0"
   },
   "devDependencies": {},
   "scripts": {
