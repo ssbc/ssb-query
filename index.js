@@ -4,7 +4,7 @@ var path = require('path')
 var Links = require('streamview-links')
 
 exports.name = 'query'
-
+exports.version = require('./package.json').version
 exports.manifest = {
   read: 'source', dump: 'source'
 }
