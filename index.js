@@ -2,6 +2,7 @@
 var pull = require('pull-stream')
 var path = require('path')
 var Links = require('streamview-links')
+var explain = require('explain-error')
 
 exports.name = 'query'
 exports.version = require('./package.json').version
@@ -63,9 +64,9 @@ exports.init = function  (ssb, config) {
     console.log('query', JSON.stringify(opts.query, null, 2))
       return links.read(opts, function (ts, cb) {
         ssb.sublevel('log').get(ts, function (err, key) {
-          if(err) return cb(err)
+          if(err) return cb(explain(err, 'missing timestamp:'+ts))
           ssb.get(key, function (err, value) {
-            if(err) return cb(err)
+            if(err) return cb(explain(err, 'missing key:'+key))
             cb(null, {key: key, value: value, timestamp: ts})
           })
         })
