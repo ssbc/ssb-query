@@ -14,6 +14,7 @@ var indexes = [
   {key: 'clk', value: [['value', 'author'], ['value', 'sequence'], 'timestamp'] },
   {key: 'typ', value: [['value', 'content', 'type'], 'timestamp'] },
   {key: 'hsh', value: ['key', 'timestamp']},
+  {key: 'cha', value: [['value', 'content', 'channel'], 'timestamp'] },
 //  {key: 'aty', value: [['value', 'author'], ['value', 'content', 'type'], 'ts']}
 ]
 
@@ -28,7 +29,7 @@ exports.init = function  (ssb, config) {
 
   var dir = path.join(config.path, 'query')
 
-  var version = 12
+  var version = 13
   //it's really nice to tweak a few things
   //and then change the version number,
   //restart the server and have it regenerate the indexes,
