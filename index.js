@@ -42,7 +42,7 @@ exports.init = function  (ssb, config) {
 
   links.init(function (err, since) {
     pull(
-      ssb.createLogStream({gt: since || 0, live: true, limit: -1}),
+      ssb.createLogStream({gt: since || 0, live: true, sync: false}),
       pull.through(function () {
         process.stdout.write('x')
       }),
