@@ -62,7 +62,6 @@ exports.init = function  (ssb, config) {
         try { opts = {query: JSON.parse(opts) } } catch (err) {
         return pull.error(err)
       }
-    console.log('query', JSON.stringify(opts.query, null, 2))
       return links.read(opts, function (ts, cb) {
         ssb.sublevel('log').get(ts, function (err, key) {
           if(err) return cb(explain(err, 'missing timestamp:'+ts))
