@@ -1,21 +1,31 @@
 
 var pull = require('pull-stream')
 var path = require('path')
-var Links = require('streamview-links')
+var FlumeQuery = require('flumeview-query')
 var explain = require('explain-error')
+
+function isString(s) {
+  return 'string' === typeof s
+}
 
 exports.name = 'query'
 exports.version = require('./package.json').version
 exports.manifest = {
-  read: 'source', dump: 'source'
+  read: 'source'
 }
 
+//what are links used for?
+//query follows
+//query replies
+//query mentions (backlinks & mentions)
+//query votes
+
 var indexes = [
-  {key: 'clk', value: [['value', 'author'], ['value', 'sequence'], 'timestamp'] },
-  {key: 'typ', value: [['value', 'content', 'type'], 'timestamp'] },
-  {key: 'hsh', value: ['key', 'timestamp']},
-  {key: 'cha', value: [['value', 'content', 'channel'], 'timestamp'] },
-//  {key: 'aty', value: [['value', 'author'], ['value', 'content', 'type'], 'ts']}
+  {key: 'clk', value: [['value', 'author'], ['value', 'sequence']] },
+  {key: 'typ', value: [['value', 'content', 'type']] },
+//  {key: 'hsh', value: ['key']},
+  {key: 'cha', value: [['value', 'content', 'channel']] },
+  {key: 'aty', value: [['value', 'author'], ['value', 'content', 'type']]}
 ]
 
 //createHistoryStream( id, seq )
@@ -26,53 +36,28 @@ var indexes = [
 //[{$filter: {content: {type: <type>}}}, {$map: true}]
 
 exports.init = function  (ssb, config) {
-
-  var dir = path.join(config.path, 'query')
-
-  var version = 13
-  //it's really nice to tweak a few things
-  //and then change the version number,
-  //restart the server and have it regenerate the indexes,
-  //all consistent again.
-  function id (e, emit) {
-    return emit(e)
+  var s = ssb._flumeUse('query', FlumeQuery(indexes, 1))
+  var read = s.read
+  s.read = function (opts) {
+    if(!opts) opts = {}
+    if(isString(opts))
+      opts = {query: JSON.parse(opts)}
+    else if(isString(opts.query))
+      opts.query = JSON.parse(opts.query)
+    return read(opts)
   }
-
-  var links = Links(dir, indexes, id, version)
-
-  links.init(function (err, since) {
-    pull(
-      ssb.createLogStream({gt: since || 0, live: true, sync: false}),
-      pull.through(function () {
-        process.stdout.write('x')
-      }),
-      links.write(function (err) {
-        if(err) throw err
-      })
-    )
-  })
-
-  return {
-    dump: function () {
-      return links.dump()
-    },
-
-    read: function (opts) {
-      if(opts && 'string' == typeof opts)
-        try { opts = {query: JSON.parse(opts) } } catch (err) {
-        return pull.error(err)
-      }
-      return links.read(opts, function (ts, cb) {
-        ssb.sublevel('log').get(ts, function (err, key) {
-          if(err) return cb(explain(err, 'missing timestamp:'+ts))
-          ssb.get(key, function (err, value) {
-            if(err) return cb(explain(err, 'missing key:'+key))
-            cb(null, {key: key, value: value, timestamp: ts})
-          })
-        })
-      })
-    }
-  }
+  return s
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
