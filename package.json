@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "explain-error": "^1.0.1",
-    "flumeview-query": "^3.0.0",
+    "flumeview-query": "^3.0.3",
     "pull-stream": "^3.4.2",
     "streamview-links": "^2.0.0"
   },
