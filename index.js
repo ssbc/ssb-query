@@ -49,15 +49,3 @@ exports.init = function  (ssb, config) {
   return s
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
