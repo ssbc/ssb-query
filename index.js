@@ -11,7 +11,8 @@ function isString(s) {
 exports.name = 'query'
 exports.version = require('./package.json').version
 exports.manifest = {
-  read: 'source'
+  read: 'source',
+  explain: 'sync'
 }
 
 //what are links used for?
@@ -21,11 +22,11 @@ exports.manifest = {
 //query votes
 
 var indexes = [
+  {key: 'log', value: ['timestamp']},
   {key: 'clk', value: [['value', 'author'], ['value', 'sequence']] },
-  {key: 'typ', value: [['value', 'content', 'type']] },
-//  {key: 'hsh', value: ['key']},
-  {key: 'cha', value: [['value', 'content', 'channel']] },
-  {key: 'aty', value: [['value', 'author'], ['value', 'content', 'type']]}
+  {key: 'typ', value: [['value', 'content', 'type'], ['timestamp']] },
+  {key: 'cha', value: [['value', 'content', 'channel'], ['timestamp']] },
+  {key: 'aty', value: [['value', 'author'], ['value', 'content', 'type'], ['timestamp']]}
 ]
 
 //createHistoryStream( id, seq )
@@ -36,8 +37,18 @@ var indexes = [
 //[{$filter: {content: {type: <type>}}}, {$map: true}]
 
 exports.init = function  (ssb, config) {
-  var s = ssb._flumeUse('query', FlumeQuery(1, indexes))
+  var s = ssb._flumeUse('query', FlumeQuery(5, {indexes:indexes}))
   var read = s.read
+  var explain = s.explain
+  s.explain = function (opts) {
+    if(!opts) opts = {}
+    if(isString(opts))
+      opts = {query: JSON.parse(opts)}
+    else if(isString(opts.query))
+      opts.query = JSON.parse(opts.query)
+    return explain(opts)
+
+  }
   s.read = function (opts) {
     if(!opts) opts = {}
     if(isString(opts))
