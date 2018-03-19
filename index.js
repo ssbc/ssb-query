@@ -37,7 +37,7 @@ var indexes = [
 //[{$filter: {content: {type: <type>}}}, {$map: true}]
 
 exports.init = function  (ssb, config) {
-  var s = ssb._flumeUse('query', FlumeQuery(5, {indexes:indexes}))
+  var s = ssb._flumeUse('query', FlumeQuery(6, {indexes:indexes}))
   var read = s.read
   var explain = s.explain
   s.explain = function (opts) {
