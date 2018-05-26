@@ -49,7 +49,6 @@ exports.init = function  (ssb, config) {
       opts = {query: JSON.parse(opts)}
     else if(isString(opts.query))
       opts.query = JSON.parse(opts.query)
-    debugger
     return explain(opts)
   }
 
@@ -63,4 +62,5 @@ exports.init = function  (ssb, config) {
   }
   return s
 }
+
 
