@@ -21,7 +21,7 @@ exports.manifest = {
 //query votes
 
 
-var INDEX_VERSION = 7
+var INDEX_VERSION = 8
 var indexes = [
   {key: 'log', value: ['timestamp']},
   {key: 'clk', value: [['value', 'author'], ['value', 'sequence']] },
@@ -30,6 +30,7 @@ var indexes = [
   {key: 'cha', value: [['value', 'content', 'channel'], ['timestamp']] },
   {key: 'aty', value: [['value', 'author'], ['value', 'content', 'type'], ['timestamp']]},
   {key: 'ata', value: [['value', 'author'], ['value', 'content', 'type'], ['value', 'timestamp']]},
+  {key: 'art', value: [['value', 'content', 'root'], ['value', 'timestamp']]}
 ]
 
 //createHistoryStream( id, seq )
