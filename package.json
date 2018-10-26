@@ -1,7 +1,7 @@
 {
   "name": "ssb-query",
   "description": "",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "homepage": "https://github.com/dominictarr/ssb-query",
   "repository": {
     "type": "git",
