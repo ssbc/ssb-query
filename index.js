@@ -35,7 +35,7 @@ var indexes = [
 ]
 
 function mapRts (msg) {
-  msg.rts = Math.min(msg.timestamp, msg.value.timestamp)
+  msg.rts = Math.min(msg.timestamp, msg.value.timestamp) || msg.timestamp
   return msg
 }
 
@@ -69,5 +69,9 @@ exports.init = function  (ssb, config) {
   }
   return s
 }
+
+
+
+
 
 
