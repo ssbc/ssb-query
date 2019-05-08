@@ -11,7 +11,8 @@ exports.name = 'query'
 exports.version = require('./package.json').version
 exports.manifest = {
   read: 'source',
-  explain: 'sync'
+  explain: 'sync',
+  help: 'sync'
 }
 
 //what are links used for?
@@ -67,11 +68,8 @@ exports.init = function  (ssb, config) {
       opts.query = JSON.parse(opts.query)
     return read(opts)
   }
+
+  s.help = function () { return require('./help') }
   return s
 }
-
-
-
-
-
 
