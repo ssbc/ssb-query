@@ -20,7 +20,7 @@ most recently published channels, with timestamp and message count.
       "count": {"$count": true},
       "timestamp": {"$max": ["value", "timestamp"]}
   }},
-  {"$sort": [["timestamp"], ["count"]]}]
+  {"$sort": [["timestamp"], ["count"]]}
 ]
 
 ```
