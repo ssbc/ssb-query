@@ -35,7 +35,7 @@ module.exports = {
     },
     explain: {
       type: 'sync',
-      description: 'return object describing indexes ssb-query will use for this query, useful for debugging performance problems'
+      description: 'return object describing indexes ssb-query will use for this query, useful for debugging performance problems',
       args: {
         query: Query
       }
