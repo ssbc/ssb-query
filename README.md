@@ -1,7 +1,7 @@
 # ssb-query
 
 A scuttlebot plugin which implements a [flumeview-query](https://github.com/flumedb/flumeview-query)
-index for the scuttlebutt context. `ssb-query` simply used `flumeview-qurey` to use [map-filter-reduce](https://github.com/dominictarr/map-filter-reduce)
+index for the scuttlebutt context. `ssb-query` simply used `flumeview-query` to use [map-filter-reduce](https://github.com/dominictarr/map-filter-reduce)
 querys on ssb data.
 
 from the command line:
