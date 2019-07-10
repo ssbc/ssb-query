@@ -11,7 +11,7 @@ with secure-scuttlebutt data.
 
 ## installation
 
-`ssb-server` is included in the `ssb-server` distribution by default.
+`ssb-query` is included in the `ssb-server` distribution by default.
 [see plugins documentation](https://github.com/ssbc/ssb-plugins)
 
 ## usage
