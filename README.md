@@ -42,7 +42,7 @@ require('ssb-client')(function (err, sbot) {
       query: MFR_QUERY,
       ...other options
       //limit: 10, reverse: true
-    })
+    }),
     pull.collect(function (err, ary) {
       console.log(ary)
     })
