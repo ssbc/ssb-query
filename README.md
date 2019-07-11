@@ -80,7 +80,9 @@ see [flumeview-query](https://github.com/flumedb/flumeview-query) for more infor
 ```
 [{
   "$filter": {
-    "content": {channel: "solarpunk"}
+    value: {
+      content: {channel: "solarpunk"}
+    }
   }
 }]
 ```
@@ -90,7 +92,9 @@ see [flumeview-query](https://github.com/flumedb/flumeview-query) for more infor
 ```
 [{
   "$filter": {
-    "content": {root: "%<msg_id>"}
+    value: {
+      content: {root: "%<msg_id>"}
+    }
   }
 }]
 ```
@@ -100,7 +104,12 @@ see [flumeview-query](https://github.com/flumedb/flumeview-query) for more infor
 ```
 [{
   "$filter": {
-    "content": {author: "@<author_id>", type: "<msg_type>"}
+    value: {
+	  author: "@<author_id>",
+	  content: {
+	    type: "<msg_type>"
+	  }
+	}
   }
 }]
 ```
