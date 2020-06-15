@@ -22,7 +22,7 @@ exports.manifest = {
 //query votes
 
 
-var INDEX_VERSION = 9
+var INDEX_VERSION = 10
 var indexes = [
   {key: 'log', value: ['timestamp']},
   {key: 'clk', value: [['value', 'author'], ['value', 'sequence']] },
